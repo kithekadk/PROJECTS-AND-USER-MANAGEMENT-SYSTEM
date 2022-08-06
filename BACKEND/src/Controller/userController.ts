@@ -6,6 +6,9 @@ import { CustomUser } from "../Interfaces/user";
 import { customProject } from "../Interfaces/project"
 import bcrypt from 'bcrypt'
 import { projectUserSchema } from "../Helper/projectValidator";
+import nodemailer from 'nodemailer'
+import dotenv from 'dotenv'
+dotenv.config();
 
 export const registerUser = async(req:CustomUser, res:Response)=>{
     try {
@@ -60,6 +63,7 @@ export const updateComplete = async (req:customProject, res:Response)=>{
         .input('userId', mssql.VarChar, userId)
         .execute('setComplete')
 
+        notifyAdmin();
         return res.status(200).json({
             message: "Task completed"
         })
@@ -74,4 +78,42 @@ export const updateComplete = async (req:customProject, res:Response)=>{
                 message:"Internal Server Error"})
         }
     }
+}
+
+/**
+ * notify the admin on task completion
+ */
+function notifyAdmin(){
+    let transporter = nodemailer.createTransport({
+        service:'gmail',
+        host: 'smtp.gmail.com',
+        port: 587,
+        requireTLS: true,
+        auth:{
+            user:process.env.EMAIL as string,
+            pass:process.env.PASSWORD as string
+        }
+    })
+    
+    let mailOptions = {
+        from: process.env.EMAIL as string,
+        to: "kakinyidk@gmail.com",
+        subject: "Task Completion",
+        html:
+        `<div><p>Hello sir, this is to notify you on task completion</p>
+        <p>Kindly have a review</p></div>`,
+        attachment:[{
+            filename: "project report",
+            content: `This was a nice project sir, i look forward to joining a new projecct`
+        }]
+    }
+    
+    transporter.sendMail(mailOptions, function(error, info){
+        if (error){
+            console.log(error);
+        }else {
+            console.log("email sent", info.response);
+            
+        }
+    })
 }

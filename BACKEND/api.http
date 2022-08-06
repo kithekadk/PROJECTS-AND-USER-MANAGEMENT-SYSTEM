@@ -3,7 +3,7 @@ POST http://localhost:5000/projects/create
 Content-Type: application/json
 
 {
-    "projectName":"project A",
+    "projectName":"project H",
     "description":"hacking",
     "endDate":"12/3/2022"
 }
@@ -33,6 +33,6 @@ POST http://localhost:5000/users/setDone
 Content-Type: application/json
 
 {
-    "projectId":"2",
-    "userId":"1"
+    "projectId":"4",
+    "userId":"4"
 }
