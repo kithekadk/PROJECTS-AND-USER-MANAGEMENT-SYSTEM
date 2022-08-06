@@ -1,0 +1,17 @@
+
+POST http://localhost:5000/user/create
+Content-Type: application/json
+
+{
+    "projectName":"project Y",
+    "description":"hacking",
+    "endDate":"12/3/2022"
+}
+
+###
+POST http://localhost:5000/user/delete
+Content-Type: application/json
+
+{
+    "projectName":"project Y"
+}
