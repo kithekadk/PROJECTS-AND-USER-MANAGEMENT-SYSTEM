@@ -5,3 +5,9 @@ export const taskValidator = Joi.object({
     description: Joi.string().required(),
     endDate:Joi.date()
 })
+
+export const projectUserSchema = Joi.object({
+    projectId: Joi.number().required(),
+    userId: Joi.number().required()
+    
+})

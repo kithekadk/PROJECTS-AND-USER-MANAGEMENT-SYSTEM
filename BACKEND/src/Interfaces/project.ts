@@ -2,9 +2,10 @@ import { Request } from "express";
 
 export interface customProject extends Request{
     body:{
-        projectName:string,
+        projectId : number;
+        projectName: string,
         description: string,
         endDate:string,
-        assignedTo:string
+        userId:string
     }
 }

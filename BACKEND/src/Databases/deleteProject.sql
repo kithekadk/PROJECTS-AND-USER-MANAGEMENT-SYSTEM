@@ -1,5 +1,0 @@
-CREATE PROCEDURE deleteProject (@id VARCHAR(200), @projectName VARCHAR(200))
-AS
-BEGIN
-DELETE FROM PROJECTS WHERE projectName=@projectName
-END
