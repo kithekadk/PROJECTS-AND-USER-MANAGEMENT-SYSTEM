@@ -3,7 +3,7 @@ POST http://localhost:5000/projects/create
 Content-Type: application/json
 
 {
-    "projectName":"project H",
+    "projectName":"project t",
     "description":"hacking",
     "endDate":"12/3/2022"
 }
@@ -22,9 +22,9 @@ POST http://localhost:5000/users/create
 Content-Type: application/json
 
 {
-    "firstName":"alex",
+    "firstName":"DK1",
     "lastName":"kitheka",
-    "email":"dan@gmail.com",
+    "email":"dan123@gmail.com",
     "password":"12345678"
 }
 // SET TASK AS COMPLETED/
@@ -33,6 +33,17 @@ POST http://localhost:5000/users/setDone
 Content-Type: application/json
 
 {
-    "projectId":"4",
-    "userId":"4"
+    "projectId":"1006",
+    "userId":"1010"
+}
+
+
+//ASSIGNING PROJECTS TO USERS
+###
+POST http://localhost:5000/projects/assignProject
+Content-Type: application/json
+
+{
+    "projectId":"1006",
+    "userId":"1010"
 }

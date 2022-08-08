@@ -1,6 +1,6 @@
 import mssql, { pool, RequestError } from 'mssql'
 import { sqlConfig } from '../Config/config';
-import { taskValidator } from '../Helper/projectValidator';
+import { projectUserSchema, taskValidator } from '../Helper/projectValidator';
 import { customProject } from '../Interfaces/project';
 import { Response } from 'express';
 
@@ -76,3 +76,33 @@ export const projectDelete = async(req:customProject, res:Response)=>{
     }
 }
 
+export const projectAssign = async(req:customProject, res:Response)=>{
+    try {
+        const {projectId, userId} = req.body;
+
+        const{error, value} = projectUserSchema.validate(req.body)
+        if(error){
+            res.status(400).json({
+                message: error.details[0].message
+            })
+        }
+        const pool = await mssql.connect(sqlConfig);
+
+        await pool.request()
+        .input('projectId', mssql.VarChar, projectId)
+        .input('userId', mssql.VarChar, userId)
+        .execute('assignProject');
+
+        res.json({message: `User ${userId} assigned to project ${projectId}`})
+    } catch (error) {
+        if (error instanceof RequestError){
+            res.status(400).json({
+                message:error.message
+            })
+        }
+    //  res.status(400).json({
+    //     message:"Invalid project Id or Project Already assigned"
+    // })
+
+    }
+}
