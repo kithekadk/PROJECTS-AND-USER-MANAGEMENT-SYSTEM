@@ -1,13 +1,16 @@
 import { Request, Response } from "express";
 import mssql, { RequestError } from "mssql";
 import { sqlConfig } from "../Config/config";
-import { userValidator } from "../Helper/userValidator";
+import { userLoginValidator, userValidator } from "../Helper/userValidator";
 import { CustomUser } from "../Interfaces/user";
+import { User } from "../Interfaces/user";
 import { customProject } from "../Interfaces/project"
 import bcrypt from 'bcrypt'
+import jwt from 'jsonwebtoken';
 import { projectUserSchema } from "../Helper/projectValidator";
 import nodemailer from 'nodemailer'
 import dotenv from 'dotenv'
+import { any } from "joi";
 dotenv.config();
 
 export const registerUser = async(req:CustomUser, res:Response)=>{
@@ -35,6 +38,46 @@ export const registerUser = async(req:CustomUser, res:Response)=>{
     } catch (error) {
         return res.status(404).json({
             message: "User Already Exists"
+        })
+    }
+}
+
+
+export const loginUser = async(req:CustomUser, res:Response)=>{
+    try {
+        const {email, password}= req.body;
+
+        const {error, value}= userLoginValidator.validate(req.body);
+        if(error){
+            return res.status(404).json({
+                message: error.details[0].message
+            })
+        }
+
+        const pool = await mssql.connect(sqlConfig);
+
+        const user:User[] = ( await pool.request()
+        .input('email', mssql.VarChar, email)
+        .execute('loginUser')).recordset
+        
+  
+        const validPassword = await bcrypt.compare(password, user[0].password)
+        if (!validPassword){
+            return res.status(400).json({
+                message:"invalid password"
+            })
+        }
+        const logins = user.map(item =>{
+            const{password, ...rest}=item;
+            return rest;
+        })
+        const token = jwt.sign (logins[0], process.env.KEY as string, {expiresIn:'300s'})
+        return res.status(200).json({
+            message: "Logged in successfully", token
+        })
+    } catch (error) {
+            return res.status(400).json({
+            message:error
         })
     }
 }

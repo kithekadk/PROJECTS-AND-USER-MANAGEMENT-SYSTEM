@@ -1,21 +1,3 @@
-//CREATING A PROJECT
-POST http://localhost:5000/projects/create
-Content-Type: application/json
-
-{
-    "projectName":"project t",
-    "description":"hacking",
-    "endDate":"12/3/2022"
-}
-//DELETING A PROJECT/
-###
-POST http://localhost:5000/projects/delete
-Content-Type: application/json
-
-{
-    "projectId":"1"
-}
-
 //create user
 ###
 POST http://localhost:5000/users/create
@@ -24,9 +6,42 @@ Content-Type: application/json
 {
     "firstName":"DK1",
     "lastName":"kitheka",
-    "email":"dan123@gmail.com",
+    "email":"dan1234@gmail.com",
     "password":"12345678"
 }
+//LOGIN TO ACCOUNT
+###
+POST http://localhost:5000/users/login
+Content-Type: application/json
+
+{
+    "email":"dan12345@gmail.com",
+     "password":"12345678"
+   
+}
+
+//CREATING A PROJECT
+POST http://localhost:5000/projects/create
+Content-Type: application/json
+
+{
+    "projectName":"project f",
+    "description":"hacking",
+    "endDate":"12/3/2022"
+}
+
+
+//DELETING A PROJECT/
+###
+POST http://localhost:5000/projects/delete
+Content-Type: application/json
+
+{
+    "projectId":"1007"
+}
+
+
+
 // SET TASK AS COMPLETED/
 ###
 POST http://localhost:5000/users/setDone

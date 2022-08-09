@@ -3,6 +3,7 @@ import { sqlConfig } from '../Config/config';
 import { projectUserSchema, taskValidator } from '../Helper/projectValidator';
 import { customProject } from '../Interfaces/project';
 import { Response } from 'express';
+import {ExtendedData} from '../Middleware/tokenVerify'
 
 /**
  * 
@@ -100,9 +101,12 @@ export const projectAssign = async(req:customProject, res:Response)=>{
                 message:error.message
             })
         }
-    //  res.status(400).json({
-    //     message:"Invalid project Id or Project Already assigned"
-    // })
 
+    }
+}
+
+export const homePage = async(req:ExtendedData, res:Response)=>{
+    if (req.info){
+        return res.json({message:"welcome to the homepage"})
     }
 }
