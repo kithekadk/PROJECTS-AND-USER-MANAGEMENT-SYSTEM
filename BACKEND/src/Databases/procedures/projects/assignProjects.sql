@@ -1,7 +1,7 @@
 CREATE PROCEDURE assignProject(@userId VARCHAR(200), @projectId VARCHAR(200))
 AS
 BEGIN
-	IF EXISTS (SELECT * FROM dbo.PROJECTS WHERE projectId=@projectId AND userId IS NULL)
+	IF EXISTS (SELECT * FROM dbo.PROJECTS WHERE projectId = @projectId AND userId IS NULL)
 		BEGIN
 			IF EXISTS (SELECT * FROM dbo.PROJECTS WHERE userId=@userId)
 				BEGIN

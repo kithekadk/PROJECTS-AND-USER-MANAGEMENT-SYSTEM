@@ -4,9 +4,9 @@ POST http://localhost:5000/users/create
 Content-Type: application/json
 
 {
-    "firstName":"DK1",
+    "firstName":"dan",
     "lastName":"kitheka",
-    "email":"dan1234@gmail.com",
+    "email":"gamesmy177@gmail.com",
     "password":"12345678"
 }
 //LOGIN TO ACCOUNT
@@ -15,17 +15,24 @@ POST http://localhost:5000/users/login
 Content-Type: application/json
 
 {
-    "email":"dan12345@gmail.com",
-     "password":"12345678"
+    "email":"danizohdavidoh@gmail.com",
+    "password":"12345678"
    
 }
 
+//CHECKUSER
+###
+GET http://localhost:5000/users/check
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoiZGFuQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwMjEzNDU2LCJleHAiOjE2NjAyMTM3NTZ9.YCk3NtKEbFrd6flH2MBngP2LlSqPdmHVsBZWW3dcRvc
+
+###
 //CREATING A PROJECT
 POST http://localhost:5000/projects/create
 Content-Type: application/json
 
 {
-    "projectName":"project f",
+    "projectName":"project ABCd",
     "description":"hacking",
     "endDate":"12/3/2022"
 }
@@ -37,7 +44,7 @@ POST http://localhost:5000/projects/delete
 Content-Type: application/json
 
 {
-    "projectId":"1007"
+    "projectId":"3"
 }
 
 
@@ -48,8 +55,8 @@ POST http://localhost:5000/users/setDone
 Content-Type: application/json
 
 {
-    "projectId":"1006",
-    "userId":"1010"
+    "projectId":"1",
+    "userId":"1"
 }
 
 
@@ -59,6 +66,6 @@ POST http://localhost:5000/projects/assignProject
 Content-Type: application/json
 
 {
-    "projectId":"1006",
-    "userId":"1010"
+    "projectId":"2",
+    "userId":"2"
 }

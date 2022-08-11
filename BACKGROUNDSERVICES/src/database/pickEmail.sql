@@ -1,0 +1,5 @@
+CREATE PROCEDURE pickEmail (@userId VARCHAR(200))
+AS
+BEGIN
+SELECT email FROM dbo.USERS u INNER JOIN dbo.PROJECTS p ON p.userId = @userId
+END

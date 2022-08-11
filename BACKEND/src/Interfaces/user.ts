@@ -9,6 +9,10 @@ export interface CustomUser extends Request{
     }
 }
 
+export interface userInfo extends User{
+    userinfo?:User;
+}
+
 export interface User{
     firstName: string,
     lastName: string,

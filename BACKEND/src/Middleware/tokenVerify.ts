@@ -17,10 +17,10 @@ export const verifyToken = (req:ExtendedData, res:Response, next:NextFunction)=>
             return res.status(404).json({
                 message: "Permission set denies you access"
             })
-        
-            const data = jwt.verify(token, process.env.KEY as string) as Data;
-            req.info= data
         }
+        const data = jwt.verify(token, process.env.KEY as string) as Data;
+        req.info = data
+        
     } catch (error) {
         res.json({
             message: error

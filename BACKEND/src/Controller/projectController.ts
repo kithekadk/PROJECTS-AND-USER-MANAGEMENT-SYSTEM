@@ -3,7 +3,8 @@ import { sqlConfig } from '../Config/config';
 import { projectUserSchema, taskValidator } from '../Helper/projectValidator';
 import { customProject } from '../Interfaces/project';
 import { Response } from 'express';
-import {ExtendedData} from '../Middleware/tokenVerify'
+import {ExtendedData} from '../Middleware/tokenVerify';
+import {userInfo} from '../Interfaces/user';
 
 /**
  * 
@@ -108,5 +109,12 @@ export const projectAssign = async(req:customProject, res:Response)=>{
 export const homePage = async(req:ExtendedData, res:Response)=>{
     if (req.info){
         return res.json({message:"welcome to the homepage"})
+    }
+}
+
+
+export const checkUserRole = async(req:userInfo, res:Response)=>{
+    if (req.userinfo){
+        res.json({email: req.userinfo.email, role: pool.request().execute('userRole')})
     }
 }

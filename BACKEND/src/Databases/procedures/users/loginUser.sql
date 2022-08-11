@@ -1,9 +1,9 @@
-CREATE PROCEDURE loginUser (@email VARCHAR(200), @password VARCHAR(200))
+CREATE PROCEDURE loginUser (@email VARCHAR(200))
 AS
 BEGIN
 	IF EXISTS (SELECT * FROM dbo.USERS WHERE email = @email)
 		BEGIN
-			SELECT * FROM dbo.USERS WHERE email = @email AND password= @password;
+			SELECT * FROM dbo.USERS WHERE email = @email;
 		END
 		ELSE
 		BEGIN
