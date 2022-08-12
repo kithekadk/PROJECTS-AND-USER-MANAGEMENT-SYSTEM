@@ -12,33 +12,34 @@ interface Task {
     endDate:string,
     userId:string
     email:string
-    sentEmail:number
+    sentEmail:number,
+    firstName:string
 }
 
-const SendEmails = async()=>{
+const AssignProjectMails = async()=>{
     const pool = await mssql.connect(sqlConfig)
     const projects:Task[]=await(await pool.request()
-    .query('SELECT email FROM dbo.USERS u INNER JOIN dbo.PROJECTS p ON p.userId = u.userId WHERE status=1 AND sentEmail=0')).recordset
+    .query(`SELECT email FROM dbo.USERS u INNER JOIN dbo.PROJECTS p ON p.userId= u.userId WHERE p.userId IS NOT NULL AND  p.status=0 AND p.assigned='NO'`)).recordset
     console.log(projects);
 
     for (let project of projects){
-        ejs.renderFile(__dirname+'/../../template/template.ejs',{name:project.projectName, taskdesc:project.description}, async(error,data)=>{
+        ejs.renderFile('template/template.ejs',{name:project.firstName, projectNAME:project.projectName}, async(error,data)=>{
             let mailOptions = {
-                from: project.email,
-                to: process.env.EMAIL as string, 
-                subject: "Task Completion",
+                from: process.env.EMAIL as string,
+                to: project.email, 
+                subject: "Task Assigned",
                 html:data,
                 attachment:[
                     {
                     filename: 'task.txt',
-                    content: `This was a nice project sir, i look forward to joining a new projecct`
+                    content: `its an easy project, deadline in 2 weeks from the today`
                 }
             ]
             }
     try {
         await sendMail (mailOptions);
-        await pool.request().query(`UPDATE dbo.PROJECTS SET sentEmail = 1 WHERE status = 1 `);
-        console.log("completion email sent to admin");
+        await pool.request().query(`UPDATE dbo.PROJECTS SET assigned='YES' WHERE userId IS NOT NULL`);
+        console.log("email sent to user");
     } catch (error) {
         console.log(error)
     }
@@ -50,4 +51,4 @@ const SendEmails = async()=>{
 }
    
     
-export default SendEmails
+export default AssignProjectMails

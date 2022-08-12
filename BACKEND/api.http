@@ -6,7 +6,7 @@ Content-Type: application/json
 {
     "firstName":"dan",
     "lastName":"kitheka",
-    "email":"gamesmy177@gmail.com",
+    "email":"kakinyidk@gmail.com",
     "password":"12345678"
 }
 //LOGIN TO ACCOUNT
@@ -15,16 +15,16 @@ POST http://localhost:5000/users/login
 Content-Type: application/json
 
 {
-    "email":"danizohdavidoh@gmail.com",
+    "email":"gamesmy177@gmail.com",
     "password":"12345678"
    
 }
 
 //CHECKUSER
 ###
-GET http://localhost:5000/users/check
+GET http://localhost:5000/projects/check
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoiZGFuQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwMjEzNDU2LCJleHAiOjE2NjAyMTM3NTZ9.YCk3NtKEbFrd6flH2MBngP2LlSqPdmHVsBZWW3dcRvc
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoiZ2FtZXNteTE3N0BnbWFpbC5jb20iLCJyb2xlIjoiMCIsImlhdCI6MTY2MDI1MDQ4MiwiZXhwIjoxNjYwMjUwNzgyfQ.kMR9wcvcMR7_U46jqfnCO4m_aqZXm3LI4o4MX7u0-6I
 
 ###
 //CREATING A PROJECT
@@ -32,7 +32,7 @@ POST http://localhost:5000/projects/create
 Content-Type: application/json
 
 {
-    "projectName":"project ABCd",
+    "projectName":"project xy",
     "description":"hacking",
     "endDate":"12/3/2022"
 }
@@ -44,12 +44,12 @@ POST http://localhost:5000/projects/delete
 Content-Type: application/json
 
 {
-    "projectId":"3"
+    "projectId":"1"
 }
 
 
 
-// SET TASK AS COMPLETED/
+// SET PROJECT AS COMPLETED/
 ###
 POST http://localhost:5000/users/setDone
 Content-Type: application/json
@@ -66,6 +66,6 @@ POST http://localhost:5000/projects/assignProject
 Content-Type: application/json
 
 {
-    "projectId":"2",
-    "userId":"2"
+    "projectId":"1",
+    "userId":"1"
 }
