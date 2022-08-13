@@ -1,0 +1,103 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2.5vw;
+    background-color: rgb(201, 186, 216);
+}
+.overall{
+    background-color: rgb(132, 93, 168);
+    height: 90vh;
+    width:90vw;
+    border-radius: 30px;
+    
+}
+.nav-bar{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    padding-left: 80px;
+    padding-right: 80px;
+    font-size: 40px;
+    font-weight: bold;
+}
+.nav-bar div a{
+    padding-left: 20px;
+    list-style-type: none;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+.content-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap:40px;
+}
+h1{
+    padding-left:40px;
+    text-align: center;
+    width: 60vw;
+    color: white;
+    font-size: 40px;
+
+}
+.welcome-box{
+    display: flex;
+    gap:20px;
+    
+}
+.welcome-box div{
+    padding:20px;
+    border-radius: 10px;
+    line-height: 25px;
+    text-align: center;
+    background: rgb(201, 186, 216);
+    font-weight: bold;
+    width:18vw;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.welcome-box div a{
+    text-decoration: none;
+    background-color: rgb(132, 93, 168);
+    color:white;
+    padding:8px;
+    border-radius: 5px;
+    font-size: 15px;
+    font-weight: normal;
+}
+
+.formContainer, .loginContainer{
+    background-color: rgb(201, 186, 216);
+    padding:60px 20px 20px 20px;
+    border-radius: 10px;
+}
+.regForm input, .loginForm input{
+    height:30px;
+    width:300px;
+    padding-left:10px;
+    border-radius: 5px none;
+}
+.regForm input[type="submit"], .regForm input[type="reset"]{
+    width:147px;
+    
+}
+.loginForm input[type="submit"], .loginForm input[type="reset"]{
+    width:147px;
+    
+}
+.signUp{
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+.loginContainer{
+    display: none;
+}

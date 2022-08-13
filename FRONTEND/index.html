@@ -5,14 +5,68 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="main.css">
 </head>
 <body>
-    <div class="nav-bar">
-        <div><span>PMUS</span></div>
+    <div class="overall">
+        <div class="nav-bar">
+            <div><span style="color:white;">PMUS</span></div>
+    
+            <div>
+                <a href="#" id="toRegister">Sign Up</a>
+                <a href="#" id="toLogin">Login</a>
+            </div>
+        </div>
+        <h1>WELCOME TO PMUS</h1>
+        <div class="content-container">
+            <div class="welcome-box">                
+                <div>
+                    <p>The Solution To Your Management Problems</p>  <br>
+                    
+                    <a href="#" class="toRegister">SIGNUP TO GET STARTED</a>
+                </div>
+                <div>
+                    <p>View Projects</p>  <br>
+                    <a href="#" class="toLogin">LOGIN TO VIEW</a>
+                </div>
+            </div> 
+            <div class="formContainer">
+                <form class="regForm"action="" method="post">
+                    
+                    <div class="signUp">Sign Up Here <ion-icon name="person-add-sharp"></ion-icon></div><br>
+                    
+                    <label for="firstname">First Name</label><br>
+                    <input type="input" class="firstName"/><br>
+                    <label for="lastname">Last Name</label><br>
+                    <input type="input" class="lastName"/><br>
+                    <label for="email">Email</label><br>
+                    <input type="email" class="txtemail"/><br>
+                    <label for="password">Password</label><br>
+                    <input type="password" class="txtpassword"/><br>
+                    <br>
+                    <input type="submit" value="REGISTER" class="btnRegister">
+                    <input type="reset" value="RESET">
+                </form>
+            </div>
+                <div class="loginContainer">
+                <form class="loginForm"action="" method="post">
+                    
+                    <div class="signUp">Login Here <ion-icon name="person-circle-sharp"></ion-icon></div><br>
 
-        <div>
-            <a href="#"></a>
+                    <label for="email">Email</label><br>
+                    <input type="email" id="email"/><br>
+                    <label for="password">Password</label><br>
+                    <input type="password" id="password"/><br>
+                    <br>
+                    <input type="submit" value="LOGIN" class="btnLogin">
+                    <input type="reset" value="RESET">
+                </form>
+            </div>
         </div>
     </div>
+
+<script src="./dist/main.js"></script>   
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </body>
 </html>

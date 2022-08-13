@@ -8,9 +8,9 @@ import { customProject } from "../Interfaces/project"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
 import { projectUserSchema } from "../Helper/projectValidator";
-import nodemailer from 'nodemailer'
+
 import dotenv from 'dotenv'
-// import { any } from "joi";
+
 dotenv.config();
 
 export const registerUser = async(req:CustomUser, res:Response)=>{

@@ -107,14 +107,21 @@ export const projectAssign = async(req:customProject, res:Response)=>{
 }
 
 export const homePage = async(req:ExtendedData, res:Response)=>{
+    try {
     if (req.info){
         return res.json({message:"welcome to the homepage"})
+    }    
+    } catch (error) {
+        console.log(error);
+        
     }
+    
+    
 }
 
 
-export const checkUserRole = async(req:userInfo, res:Response)=>{
-    if (req.userinfo){
-        res.json({email: req.userinfo.email, role: pool.request().execute('userRole')})
+export const checkUserRole = async(req:ExtendedData, res:Response)=>{
+    if (req.info){
+        res.json({email: req.info.email , role: req.info.role})
     }
 }

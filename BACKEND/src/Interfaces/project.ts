@@ -16,6 +16,8 @@ export interface Data{
     description: string,
     endDate:string,
     userId:string,
+    email:string,
+    role:string,
     iat:number,
     exp:number
 }

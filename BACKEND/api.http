@@ -4,9 +4,9 @@ POST http://localhost:5000/users/create
 Content-Type: application/json
 
 {
-    "firstName":"dan",
-    "lastName":"kitheka",
-    "email":"kakinyidk@gmail.com",
+    "firstName":"alex",
+    "lastName":"waihenya",
+    "email":"lxwaihenya@gmail.com",
     "password":"12345678"
 }
 //LOGIN TO ACCOUNT
@@ -15,7 +15,7 @@ POST http://localhost:5000/users/login
 Content-Type: application/json
 
 {
-    "email":"gamesmy177@gmail.com",
+    "email":"kakinyidk@gmail.com",
     "password":"12345678"
    
 }
@@ -24,7 +24,7 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/projects/check
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoiZ2FtZXNteTE3N0BnbWFpbC5jb20iLCJyb2xlIjoiMCIsImlhdCI6MTY2MDI1MDQ4MiwiZXhwIjoxNjYwMjUwNzgyfQ.kMR9wcvcMR7_U46jqfnCO4m_aqZXm3LI4o4MX7u0-6I
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwMzExNzE3LCJleHAiOjE2NjAzMTIwMTd9.0uNFQnyM4ip4YuZZ6a00oM600CQtGGnvXnBdu8qIegE
 
 ###
 //CREATING A PROJECT
@@ -32,7 +32,7 @@ POST http://localhost:5000/projects/create
 Content-Type: application/json
 
 {
-    "projectName":"project xy",
+    "projectName":"",
     "description":"hacking",
     "endDate":"12/3/2022"
 }
@@ -55,8 +55,8 @@ POST http://localhost:5000/users/setDone
 Content-Type: application/json
 
 {
-    "projectId":"1",
-    "userId":"1"
+    "projectId":"2",
+    "userId":"6"
 }
 
 
@@ -64,8 +64,9 @@ Content-Type: application/json
 ###
 POST http://localhost:5000/projects/assignProject
 Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwMzExNzE3LCJleHAiOjE2NjAzMTIwMTd9.0uNFQnyM4ip4YuZZ6a00oM600CQtGGnvXnBdu8qIegE
 
 {
-    "projectId":"1",
-    "userId":"1"
+    "projectId":"2",
+    "userId":"6"
 }

@@ -23,7 +23,7 @@ const AssignProjectMails = async()=>{
     console.log(projects);
 
     for (let project of projects){
-        ejs.renderFile('template/template.ejs',{name:project.firstName, projectNAME:project.projectName}, async(error,data)=>{
+        ejs.renderFile('template/templateAssigned.ejs',{name:project.firstName, project:project.projectName}, async(error,data)=>{
             let mailOptions = {
                 from: process.env.EMAIL as string,
                 to: project.email, 

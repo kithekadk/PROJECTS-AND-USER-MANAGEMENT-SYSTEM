@@ -5,8 +5,8 @@ import { verifyToken } from "../Middleware/tokenVerify";
 const router = Router()
 
 router.post('/create', createProject)
-router.post('/delete', projectDelete)
-router.post('/assignProject', projectAssign)
-router.post('/check', verifyToken)
+router.post('/delete', verifyToken, projectDelete)
+router.post('/assignProject', verifyToken, projectAssign)
+router.get('/check', verifyToken, checkUserRole)
 
 export default router
