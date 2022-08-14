@@ -22,11 +22,12 @@
             <div class="welcome-box">                
                 <div>
                     <p>The Solution To Your Management Problems</p>  <br>
-                    
+                    <!-- <img src="https://media.gettyimages.com/photos/projects-enter-key-picture-id186867282?s=2048x2048" alt="Project" width="260px" height="150px"><br> -->
                     <a href="#" class="toRegister">SIGNUP TO GET STARTED</a>
                 </div>
                 <div>
                     <p>View Projects</p>  <br>
+                    <!-- <img src="https://media.gettyimages.com/photos/login-picture-id482713673?s=2048x2048" alt="login" width="260px" height="150px"><br> -->
                     <a href="#" class="toLogin">LOGIN TO VIEW</a>
                 </div>
             </div> 
@@ -34,15 +35,15 @@
                 <form class="regForm"action="" method="post">
                     
                     <div class="signUp">Sign Up Here <ion-icon name="person-add-sharp"></ion-icon></div><br>
-                    
+                    <div class="regError"></div>
                     <label for="firstname">First Name</label><br>
-                    <input type="input" class="firstName"/><br>
+                    <input type="input" id="firstName"/><br>
                     <label for="lastname">Last Name</label><br>
-                    <input type="input" class="lastName"/><br>
+                    <input type="input" id="lastName"/><br>
                     <label for="email">Email</label><br>
-                    <input type="email" class="txtemail"/><br>
+                    <input type="email" id="RegEmail"/><br>
                     <label for="password">Password</label><br>
-                    <input type="password" class="txtpassword"/><br>
+                    <input type="password" id="Regpassword"/><br>
                     <br>
                     <input type="submit" value="REGISTER" class="btnRegister">
                     <input type="reset" value="RESET">
@@ -52,11 +53,11 @@
                 <form class="loginForm"action="" method="post">
                     
                     <div class="signUp">Login Here <ion-icon name="person-circle-sharp"></ion-icon></div><br>
-
+                    <div class="loginError"></div>
                     <label for="email">Email</label><br>
-                    <input type="email" id="email"/><br>
+                    <input type="email" id="txtemail"/><br>
                     <label for="password">Password</label><br>
-                    <input type="password" id="password"/><br>
+                    <input type="password" id="txtpassword"/><br>
                     <br>
                     <input type="submit" value="LOGIN" class="btnLogin">
                     <input type="reset" value="RESET">

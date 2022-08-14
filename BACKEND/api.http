@@ -16,15 +16,14 @@ Content-Type: application/json
 
 {
     "email":"kakinyidk@gmail.com",
-    "password":"12345678"
-   
+    "password":"12345678"  
 }
 
 //CHECKUSER
 ###
 GET http://localhost:5000/projects/check
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwMzExNzE3LCJleHAiOjE2NjAzMTIwMTd9.0uNFQnyM4ip4YuZZ6a00oM600CQtGGnvXnBdu8qIegE
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwNDgwODYyLCJleHAiOjE2NjA0ODExNjJ9.QDROt1dVQkBFn9i77qt4pQia9dXiX7A-G_zRrWBujM4
 
 ###
 //CREATING A PROJECT
@@ -32,7 +31,7 @@ POST http://localhost:5000/projects/create
 Content-Type: application/json
 
 {
-    "projectName":"",
+    "projectName":"abcd",
     "description":"hacking",
     "endDate":"12/3/2022"
 }
@@ -64,9 +63,20 @@ Content-Type: application/json
 ###
 POST http://localhost:5000/projects/assignProject
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwMzExNzE3LCJleHAiOjE2NjAzMTIwMTd9.0uNFQnyM4ip4YuZZ6a00oM600CQtGGnvXnBdu8qIegE
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwNTAyOTc0LCJleHAiOjE2NjA1MDMyNzR9.8v1t_Ysl7-0VYii-op04RSULkdGsXvhCG3rKRlxNMzo
 
 {
-    "projectId":"2",
-    "userId":"6"
+    "projectId":"6",
+    "userId":"2"
 }
+
+# CHECKING PENDING PROJECTS
+###
+POST http://localhost:5000/projects/pendingProjects
+Content-Type: application/json
+
+
+CHECKING COMPLETE PROJECTS
+###
+POST http://localhost:5000/projects/completeProjects
+Content-Type: application/json

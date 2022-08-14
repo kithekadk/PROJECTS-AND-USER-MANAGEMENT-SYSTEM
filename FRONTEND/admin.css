@@ -1,0 +1,119 @@
+*{
+    margin:0;
+    padding:0;
+}
+body{
+    background-color: rgb(201, 186, 216);
+    color: white;
+}
+
+.adminContainer{
+    display: grid;
+    grid-template-columns: 15vw 25vw 50vw;
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas: "a b c"
+                         "a b c"
+                         "a d d";
+    margin-left: 5vw;
+    margin-top: 2.5vw;
+    gap:5px;
+    
+}
+
+.dashboard{
+    display: flex;
+    flex-direction: column;
+    grid-area: a;
+    min-height: 85vh;
+    max-height: 85vh;
+    border-radius: 15px;
+    padding:20px;
+    background-color: rgb(132, 93, 168);
+    justify-content: center;
+    align-items: center;
+}
+.createProject{
+    grid-area: b;
+    border-radius: 20px;
+    padding:20px;
+    background-color: rgb(132, 93, 168);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.pendingProjects{
+    grid-area: c;
+    border-radius: 20px;
+    padding:20px;
+    background-color: rgb(132, 93, 168);
+}
+.completedProjects{
+    grid-area: d;
+    border-radius: 20px;
+    padding:20px;
+    background-color: rgb(132, 93, 168);
+}
+
+.adminContainer > div{
+    padding:20px;
+}
+
+.icons{
+    font-size: 50px;
+}
+.adminRoles{
+    text-align: center;
+    line-height: 80px;
+}
+.adminRoles a{
+    text-decoration: none;
+    background-color: rgb(201, 186, 216);
+    padding:10px;
+    border-radius: 8px;
+    min-width: 200px;
+}
+h2{
+    text-align: center;
+}
+.createProjectForm{
+    color:black;
+    background-color: rgb(201, 186, 216);
+    padding: 20px;
+    width:300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+.createProjectForm input, .createProjectForm textarea{
+    padding:8px;
+    border:none;
+    border-radius:5px ;
+    width:280px
+}
+#btnPrjtcreate{
+    background-color: green;
+    color: white;
+    font-size: 20px;
+}
+/* .displayPending{
+    display:grid
+
+} */
+.displayPending div{
+    border:solid
+}
+.displayId{
+    grid-area: a;
+    border:black solid
+}
+.displayName{
+    grid-area: b;
+}
+.displaydesc{
+    grid-area: c;
+}
+.deadline{
+    grid-area: d;
+}

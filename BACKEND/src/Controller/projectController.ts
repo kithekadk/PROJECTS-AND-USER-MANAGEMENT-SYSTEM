@@ -1,7 +1,7 @@
 import mssql, { pool, RequestError } from 'mssql'
 import { sqlConfig } from '../Config/config';
 import { projectUserSchema, taskValidator } from '../Helper/projectValidator';
-import { customProject } from '../Interfaces/project';
+import { customProject, Project } from '../Interfaces/project';
 import { Response } from 'express';
 import {ExtendedData} from '../Middleware/tokenVerify';
 import {userInfo} from '../Interfaces/user';
@@ -114,14 +114,44 @@ export const homePage = async(req:ExtendedData, res:Response)=>{
     } catch (error) {
         console.log(error);
         
-    }
-    
-    
+    }   
 }
 
 
 export const checkUserRole = async(req:ExtendedData, res:Response)=>{
     if (req.info){
         res.json({email: req.info.email , role: req.info.role})
+    }
+}
+
+export const pendingProjects = async (req:customProject, res:Response)=>{
+    try {
+        const pool = await mssql.connect(sqlConfig);
+
+        const project: Project[]= await(
+        await pool.request()
+        .execute('pendingProjects')).recordset
+
+        res.status(200).json({
+            project
+        })
+    } catch (error) {
+        error
+    }
+}
+
+export const completeProjects = async (req:customProject, res:Response)=>{
+    try {
+        const pool = await mssql.connect(sqlConfig)
+
+        const projectcomplete:Project[] = await(
+        await pool.request()
+        .execute('completeProjects')).recordset
+
+        res.status(200).json({
+            projectcomplete
+        })
+    } catch (error) {
+        error
     }
 }

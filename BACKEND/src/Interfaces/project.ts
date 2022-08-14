@@ -10,6 +10,13 @@ export interface customProject extends Request{
     }
 }
 
+export interface Project{
+    projectId : number;
+    projectName: string,
+    description: string,
+    endDate:string
+}
+
 export interface Data{
     projectId : number;
     projectName: string,

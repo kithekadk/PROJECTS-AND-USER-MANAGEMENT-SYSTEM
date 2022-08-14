@@ -46,6 +46,8 @@ export const registerUser = async(req:CustomUser, res:Response)=>{
 export const loginUser = async(req:CustomUser, res:Response)=>{
     try {
         const {email, password}= req.body;
+        console.log(req.body);
+        
 
         const {error, value}= userLoginValidator.validate(req.body);
         if(error){

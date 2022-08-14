@@ -1,11 +1,8 @@
-const regForm = document.querySelector(".regForm") as HTMLFormElement;
-
-
 const formContainer = document.querySelector(".formContainer") as HTMLDivElement;
 const loginContainer = document.querySelector(".loginContainer") as HTMLDivElement;
 
 
-const btnLogin = document.querySelector(".btnLogin") as HTMLButtonElement;
+
 const toLogin = document.querySelector(".toLogin") as HTMLAnchorElement;
 const toRegister = document.querySelector(".toRegister") as HTMLAnchorElement;
 
@@ -30,13 +27,80 @@ toRegister.addEventListener('click',()=>{
         loginContainer.style.display="none"
     }
 })
-
-const firstName = document.querySelector(".firstName") as HTMLInputElement;
-const lastName = document.querySelector(".lastName") as HTMLInputElement;
-const txtemail = document.querySelector(".txtemail") as HTMLInputElement;
-const txtpassword = document.querySelector(".txtpassword") as HTMLInputElement;
+const regForm = document.querySelector(".regForm") as HTMLFormElement;
+const firstName = document.getElementById("firstName") as HTMLInputElement;
+const lastName = document.getElementById("lastName") as HTMLInputElement;
+const RegEmail = document.getElementById("RegEmail") as HTMLInputElement;
+const Regpassword = document.getElementById("Regpassword") as HTMLInputElement;
 const btnRegister = document.querySelector(".btnRegister") as HTMLButtonElement;
+const regError = document.querySelector(".regError") as HTMLDivElement;
+
+//Register Logic
+class RegUser{
+    static getUser(){
+        return new RegUser
+    }
+    constructor(){}
+
+    registerUser(fname:string, lname:string, email:string, password:string){
+        const promise2= new Promise<{error?:string, message?:string }>((resolve, reject)=>{
+            fetch('http://localhost:5000/users/create', {
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                method:'POST',
+                body:JSON.stringify({
+                    "firstName":fname,
+                    "lastName":lname,
+                    "email":email,
+                    "password":password
+                })
+            }).then(res=>{
+                resolve(res.json())
+            }).catch(err=>{
+                reject(err)
+            })
+        })
+        promise2.then((data=>console.log(data))).catch(err=>console.log(err))
+    }
+}
+btnRegister.addEventListener('click',(e)=>{
+    e.preventDefault();
+    const RegfName = firstName.value
+    const ReglName = lastName.value
+    const EmailReg = RegEmail.value
+    const passwordReg = Regpassword.value
+    
+    
+    if (!RegfName || !ReglName || !EmailReg || !passwordReg){
+        regError.style.color="red"
+        regError.textContent="All the fields are required"
+        setTimeout(() => {
+            regError.textContent=""
+        }, 3000);
+    }
+    else{
+        RegUser.getUser().registerUser(RegfName, ReglName, EmailReg,passwordReg)
+        firstName.value = ""
+        lastName.value = ""
+        RegEmail.value = ""
+        Regpassword.value = ""
+
+        setTimeout(() => {
+            loginForm 
+        }, 3000);
+
+    }
+})
+
+
+//Login Logic
 const loginForm = document.querySelector(".loginForm") as HTMLFormElement;
+const txtemail = document.getElementById("txtemail") as HTMLInputElement;
+const txtpassword = document.getElementById("txtpassword") as HTMLInputElement;
+const btnLogin = document.querySelector(".btnLogin") as HTMLButtonElement;
+const loginError= document.querySelector(".loginError")as HTMLDivElement;
     
 class Users{
     static getUser(){
@@ -46,6 +110,8 @@ class Users{
 
     loginUser(email:string, password:string){
         const promise1 = new Promise<{error?:string, token?:string, message?:string}>((resolve, reject)=>{
+           
+            
             fetch('http://localhost:5000/users/login',{
                 headers:{
                     'Accept':'application/json',
@@ -60,23 +126,56 @@ class Users{
             }).then(res=>{
                 resolve(res.json())
             }).catch(err=>{
-                resolve(err)
+                loginError.textContent=(err.json(onmessage))
             })
         })
-        promise1.then((data=> console.log(data))).catch(err=>console.log(err))
+        promise1.then(data=> {
+            data.token?localStorage.setItem('token', data.token):''
+            this.redirect()
+        }).catch(err=>console.log(err))
     }
-}
-const userEmail=txtemail.value 
-const userpwd=txtpassword.value 
-const inputs = (userEmail !== " " && userpwd !==" ")
+    redirect(){
+        const token = localStorage.getItem('token') as string
 
-loginForm.addEventListener('submit',(e)=>{
+        new Promise <{email?:string, role?:string}>((resolve, reject)=>{
+            fetch('http://localhost:5000/projects/check',{
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'token':token
+                },
+                method:"GET"
+            }).then(res=>resolve(res.json()))
+            .catch(err=> reject(err))
+        }).then(data=>{
+            if (data.role === '1'){
+                localStorage.setItem('usrMail', data.email);
+                location.href ='admin.html'
+            }else{
+                location.href = 'user.html'
+            }
+        })
+}
+}
+
+btnLogin.addEventListener('click',(e)=>{
     e.preventDefault();
-    if (!inputs){
-        console.log('input all fields');    
-    }else{
-        Users.getUser().loginUser(userEmail,userpwd);
+    const emailLog =txtemail.value
+    const pwdLog =txtpassword.value
+
+    if (!emailLog || !pwdLog){
+        
+        loginError.style.color="red"
+        loginError.textContent="All Input Fieds Required"
+        setTimeout(() => {
+        loginError.textContent=""   
+        }, 3000); 
+    }else{        
+        Users.getUser().loginUser(emailLog, pwdLog);   
+        txtemail.value=""
+        txtpassword.value=""     
     }
 })
+
 
 
