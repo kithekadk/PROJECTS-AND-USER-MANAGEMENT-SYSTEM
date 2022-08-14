@@ -4,7 +4,7 @@ import { sqlConfig } from "../Config/config";
 import { userLoginValidator, userValidator } from "../Helper/userValidator";
 import { CustomUser } from "../Interfaces/user";
 import { User } from "../Interfaces/user";
-import { customProject } from "../Interfaces/project"
+import { customProject, Project } from "../Interfaces/project"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
 import { projectUserSchema } from "../Helper/projectValidator";
@@ -121,5 +121,21 @@ export const updateComplete = async (req:customProject, res:Response)=>{
             res.status(500).json({
                 message:"Internal Server Error"})
         }
+    }
+}
+
+export const checkAssigned = async(req:customProject, res:Response)=>{
+    try {
+        const pool= await mssql.connect(sqlConfig)
+
+        const assignedProj: Project[]= await(
+            await pool.request()
+            .execute('checkAssigned')).recordset
+
+        res.status(200).json({
+            assignedProj
+        })
+    } catch (error) {
+        error
     }
 }

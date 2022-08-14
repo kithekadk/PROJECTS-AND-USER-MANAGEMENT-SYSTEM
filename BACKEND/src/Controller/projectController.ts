@@ -120,7 +120,7 @@ export const homePage = async(req:ExtendedData, res:Response)=>{
 
 export const checkUserRole = async(req:ExtendedData, res:Response)=>{
     if (req.info){
-        res.json({email: req.info.email , role: req.info.role})
+        res.json({email: req.info.email , role: req.info.role, userId: req.info.userId})
     }
 }
 

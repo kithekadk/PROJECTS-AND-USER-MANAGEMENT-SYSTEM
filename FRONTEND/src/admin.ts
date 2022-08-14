@@ -5,6 +5,7 @@ interface project{
     projectName: string,
     description: string,
     deadline: string,
+    email:string,
     userId:string
 }
 

@@ -2,11 +2,13 @@ import { Request } from "express";
 
 export interface customProject extends Request{
     body:{
+        email:string
         projectId : number;
         projectName: string,
         description: string,
         endDate:string,
-        userId:string
+        userId:string,
+        
     }
 }
 

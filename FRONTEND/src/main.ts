@@ -137,7 +137,7 @@ class Users{
     redirect(){
         const token = localStorage.getItem('token') as string
 
-        new Promise <{email?:string, role?:string}>((resolve, reject)=>{
+        new Promise <{email?:string, role?:string, userId?:number}>((resolve, reject)=>{
             fetch('http://localhost:5000/projects/check',{
                 headers:{
                     'Accept': 'application/json',
@@ -152,6 +152,7 @@ class Users{
                 localStorage.setItem('usrMail', data.email);
                 location.href ='admin.html'
             }else{
+                localStorage.setItem('normalUser', data.email)
                 location.href = 'user.html'
             }
         })

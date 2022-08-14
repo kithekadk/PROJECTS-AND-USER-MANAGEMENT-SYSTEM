@@ -15,7 +15,7 @@ POST http://localhost:5000/users/login
 Content-Type: application/json
 
 {
-    "email":"kakinyidk@gmail.com",
+    "email":"lxwaihenya@gmail.com",
     "password":"12345678"  
 }
 
@@ -23,7 +23,8 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/projects/check
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwNDgwODYyLCJleHAiOjE2NjA0ODExNjJ9.QDROt1dVQkBFn9i77qt4pQia9dXiX7A-G_zRrWBujM4
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImZpcnN0TmFtZSI6ImFsZXgiLCJsYXN0TmFtZSI6IndhaWhlbnlhIiwiZW1haWwiOiJseHdhaWhlbnlhQGdtYWlsLmNvbSIsInJvbGUiOiIwIiwiaWF0IjoxNjYwNTEwNjk5LCJleHAiOjE2NjA1MTA5OTl9.wMgODeHNpaNX0IYHmtxQR-pnp-ZaVyJndgh97BtTaus
+
 
 ###
 //CREATING A PROJECT
@@ -80,3 +81,10 @@ CHECKING COMPLETE PROJECTS
 ###
 POST http://localhost:5000/projects/completeProjects
 Content-Type: application/json
+
+
+//cCHECK IF ASSIGNED PROJECT
+###
+POST http://localhost:5000/users/assigned
+Content-Type: application/json
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImZpcnN0TmFtZSI6ImFsZXgiLCJsYXN0TmFtZSI6IndhaWhlbnlhIiwiZW1haWwiOiJseHdhaWhlbnlhQGdtYWlsLmNvbSIsInJvbGUiOiIwIiwiaWF0IjoxNjYwNTEwNjk5LCJleHAiOjE2NjA1MTA5OTl9.wMgODeHNpaNX0IYHmtxQR-pnp-ZaVyJndgh97BtTaus
