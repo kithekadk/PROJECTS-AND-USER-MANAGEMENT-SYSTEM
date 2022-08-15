@@ -153,3 +153,19 @@ export const displayAllUsers = async(req:Userdetails, res:Response)=>{
         error
     }
 }
+
+export const UnassignedUsers = async(req:Userdetails, res:Response)=>{
+    try {
+        const pool= await mssql.connect(sqlConfig)
+
+        const IdleUsers: Userdetails[] = await(
+            await pool.request().execute('IdleUsers')).recordset
+
+        res.status(200).json({
+            IdleUsers
+        })
+        
+    } catch (error) {
+        error
+    }
+}

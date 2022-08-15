@@ -1,9 +1,9 @@
-CREATE PROCEDURE deleteProject (@projectId VARCHAR(200))
+CREATE PROCEDURE deleteProject (@projectName VARCHAR(200))
 AS
 BEGIN
-IF EXISTS (SELECT projectId, ProjectName FROM dbo.PROJECTS WHERE projectId=@projectId)
+IF EXISTS (SELECT projectId, ProjectName FROM dbo.PROJECTS WHERE projectName=@projectName)
 BEGIN
-	DELETE FROM PROJECTS WHERE projectId=@projectId;
+	DELETE FROM PROJECTS WHERE projectName=@projectName;
 	RETURN;
 END
 BEGIN

@@ -197,6 +197,7 @@ checkuserDiv.addEventListener('click', ()=>{
     availableusers.style.display="block" 
     uncompleted.style.display="none"
 })
+
 fetch("http://localhost:5000/users/allusers",{
     headers:{
         'Accept':'application/json',
@@ -207,11 +208,9 @@ fetch("http://localhost:5000/users/allusers",{
     res=>{
         res.json().then(
             data=>{
-                console.log(data);
-                
+                 
                 const allUsers : users[] = data.allusers
                 
-                console.log(allUsers)
                 if (allUsers.length > 0){
                     let temp = "<table border>"
 
@@ -232,11 +231,11 @@ fetch("http://localhost:5000/users/allusers",{
                         temp += '<td>' + email + '</td>'
                         temp += '</tr>'
                     })
-                    // const displayComplete=document.querySelector(".displayComplete") as HTMLDivElement;
+                    
                     displayUsers.innerHTML=temp;
                     
                 }else{
-                    // const displayComplete=document.querySelector(".displayComplete") as HTMLDivElement;
+                    
                     displayUsers.textContent="No users at the moment";
                 }
             }
@@ -244,3 +243,99 @@ fetch("http://localhost:5000/users/allusers",{
     }
 )
 
+//assigning projects
+const userEmails = document.getElementById("userEmails")
+fetch("http://localhost:5000/users/idleusers",{
+    headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+    },
+    method:"POST"
+}).then(
+    res=>{
+        res.json().then(
+            data=>{
+                
+                let pendingUsers: users[]= data.IdleUsers
+                
+                if(pendingUsers.length>0){
+                const emails = pendingUsers.filter((el)=>{
+                    return el.email
+                })
+                emails.forEach((el)=>{
+                    let userEmail = el.email
+                    const option= document.createElement("option")
+                    option.innerHTML = userEmail
+                    userEmails?.appendChild(option)
+                })
+                
+                }
+            }
+        )
+    }
+)
+
+const pendingjob = document.getElementById("pendingjob")
+fetch("http://localhost:5000/projects/pendingProjects",{
+    headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+    },
+    method:"POST"
+}).then(
+    res=>{
+        res.json().then(
+            data=>{
+                
+                let pendingprojs :project[]= data.project
+                if(pendingprojs.length>0){
+                    const projNames = pendingprojs.filter((el)=>{
+                        return el.projectName
+                    })
+                    projNames.forEach((el)=>{
+                        let projname= el.projectName
+                        const option1= document.createElement("option")
+                        option1.innerHTML=projname
+                        pendingjob?.appendChild(option1)
+                    })
+                }
+            }
+        )
+    }
+)
+
+const deleteProject = document.querySelector(".deleteProject") as HTMLButtonElement
+deleteProject.addEventListener('click',(e)=>{
+    e.preventDefault()
+
+if (pendingjob){
+    delProject.getProject().deleteNow(pendingjob.innerText)
+    console.log(pendingjob.innerText);
+    setTimeout(() => {
+        window.location.reload()
+    }, 3000);
+}else{
+    pendingjob!.innerText="--no task--"
+}
+})
+
+class delProject{
+    static getProject(){
+        return new delProject
+    }
+    constructor(){}
+    deleteNow(projectName:string){
+        const promise5 = new Promise((resolve, reject)=>{
+            fetch("http://localhost:5000/projects/delete",{
+                headers:{
+                    'Accept':'application/json',
+                    'Content-Type':'application/json'
+                },
+                method:"POST",
+                body:JSON.stringify({
+                    "projectName": projectName
+                })
+            })
+        })
+    }
+}

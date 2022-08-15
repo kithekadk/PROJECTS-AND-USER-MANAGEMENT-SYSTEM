@@ -61,20 +61,20 @@ export const createProject = async(req:customProject, res:Response)=>{
 
 export const projectDelete = async(req:customProject, res:Response)=>{
     try {
-        const {projectId}=req.body
+        const {projectName}=req.body
 
         const pool = await mssql.connect(sqlConfig)
         await pool.request()
-        .input('projectId',mssql.VarChar, projectId)
+        .input('projectName',mssql.VarChar, projectName)
         .execute('deleteProject')
 
-        return res.json({message: `PROJECT ${projectId} deleted`}) 
+        return res.json({message: `PROJECT ${projectName} deleted`}) 
     } catch (error) {
         console.log(error);
         
         if(error instanceof RequestError){
             return res.status(404).json({
-                message:"No Task With That ID."
+                message:"No Task With That Name."
             })
         }
     }
