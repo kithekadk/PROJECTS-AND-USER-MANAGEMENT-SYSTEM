@@ -5,8 +5,8 @@ import { verifyToken } from "../Middleware/tokenVerify";
 const router = Router()
 
 router.post('/create', createProject)
-router.post('/delete', verifyToken, projectDelete)
-router.post('/assignProject', verifyToken, projectAssign)
+router.post('/delete', projectDelete)
+router.post('/assignProject',verifyToken, projectAssign)
 router.get('/check', verifyToken, checkUserRole)
 router.post('/pendingProjects', pendingProjects)
 router.post('/completeProjects', completeProjects)

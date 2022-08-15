@@ -149,10 +149,10 @@ class Users{
             .catch(err=> reject(err))
         }).then(data=>{
             if (data.role === '1'){
-                localStorage.setItem('usrMail', data.email);
+                localStorage.setItem('usrMail', data.email!);
                 location.href ='admin.html'
             }else{
-                localStorage.setItem('normalUser', data.email)
+                localStorage.setItem('normalUser', data.email!)
                 location.href = 'user.html'
             }
         })

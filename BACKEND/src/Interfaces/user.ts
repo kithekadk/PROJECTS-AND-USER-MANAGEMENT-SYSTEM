@@ -9,6 +9,16 @@ export interface CustomUser extends Request{
     }
 }
 
+export interface Userdetails extends Request{
+    body:{
+        firstName: string,
+        lastName: string,
+        email: string,
+        password: string
+    }
+}
+
+
 export interface userInfo extends User{
     userinfo?:User;
 }

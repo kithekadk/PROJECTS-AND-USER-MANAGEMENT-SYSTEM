@@ -9,7 +9,7 @@ body{
 
 .adminContainer{
     display: grid;
-    grid-template-columns: 15vw 25vw 50vw;
+    grid-template-columns: 15vw 30vw 45vw;
     grid-template-rows: repeat(3, 1fr);
     grid-template-areas: "a b c"
                          "a b c"
@@ -70,7 +70,7 @@ body{
     background-color: rgb(201, 186, 216);
     padding:10px;
     border-radius: 8px;
-    min-width: 200px;
+    
 }
 h2{
     text-align: center;
@@ -97,23 +97,24 @@ h2{
     color: white;
     font-size: 20px;
 }
-/* .displayPending{
-    display:grid
 
-} */
 .displayPending div{
     border:solid
 }
-.displayId{
-    grid-area: a;
-    border:black solid
+.selectProject{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: black;
+    background-color: rgb(201, 186, 216);
+    text-align: right;
 }
-.displayName{
-    grid-area: b;
+
+.availableusers{
+    display: none;
+    
 }
-.displaydesc{
-    grid-area: c;
-}
-.deadline{
-    grid-area: d;
+.uncompleted{
+    display: flex;
+    flex-direction: column;
 }

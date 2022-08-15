@@ -8,6 +8,9 @@ export const taskValidator = Joi.object({
 
 export const projectUserSchema = Joi.object({
     projectId: Joi.number().required(),
-    userId: Joi.number().required()
-    
+    userId: Joi.number().required()    
+})
+
+export const projectUserSchema2 = Joi.object({
+    projectId: Joi.number().required()    
 })

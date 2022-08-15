@@ -15,7 +15,7 @@ POST http://localhost:5000/users/login
 Content-Type: application/json
 
 {
-    "email":"lxwaihenya@gmail.com",
+    "email":"kakinyidk@gmail.com",
     "password":"12345678"  
 }
 
@@ -23,7 +23,7 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/projects/check
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImZpcnN0TmFtZSI6ImFsZXgiLCJsYXN0TmFtZSI6IndhaWhlbnlhIiwiZW1haWwiOiJseHdhaWhlbnlhQGdtYWlsLmNvbSIsInJvbGUiOiIwIiwiaWF0IjoxNjYwNTEwNjk5LCJleHAiOjE2NjA1MTA5OTl9.wMgODeHNpaNX0IYHmtxQR-pnp-ZaVyJndgh97BtTaus
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwNTU3MDI4LCJleHAiOjE2NjA1NTczMjh9.Ro0vdslxbsFlqwh-WU45Hj4MN4LuSkQ4C9CS1q5o_1A
 
 
 ###
@@ -44,7 +44,7 @@ POST http://localhost:5000/projects/delete
 Content-Type: application/json
 
 {
-    "projectId":"1"
+    "projectId":"6"
 }
 
 
@@ -55,8 +55,7 @@ POST http://localhost:5000/users/setDone
 Content-Type: application/json
 
 {
-    "projectId":"2",
-    "userId":"6"
+    "projectId":"2"
 }
 
 
@@ -64,11 +63,11 @@ Content-Type: application/json
 ###
 POST http://localhost:5000/projects/assignProject
 Content-Type: application/json
-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwNTAyOTc0LCJleHAiOjE2NjA1MDMyNzR9.8v1t_Ysl7-0VYii-op04RSULkdGsXvhCG3rKRlxNMzo
+token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjEsImZpcnN0TmFtZSI6ImRhbiIsImxhc3ROYW1lIjoia2l0aGVrYSIsImVtYWlsIjoia2FraW55aWRrQGdtYWlsLmNvbSIsInJvbGUiOiIxIiwiaWF0IjoxNjYwNTU3NzAyLCJleHAiOjE2NjA1NTgwMDJ9.gqnRSeT7Qk-VpAfDJ96DLhjnXkUcGxbABmXR3B49zuU
 
 {
-    "projectId":"6",
-    "userId":"2"
+    "projectId":"4",
+    "userId":"1012"
 }
 
 # CHECKING PENDING PROJECTS
@@ -77,14 +76,20 @@ POST http://localhost:5000/projects/pendingProjects
 Content-Type: application/json
 
 
-CHECKING COMPLETE PROJECTS
+//CHECKING COMPLETE PROJECTS
 ###
 POST http://localhost:5000/projects/completeProjects
 Content-Type: application/json
 
 
-//cCHECK IF ASSIGNED PROJECT
+//CHECK IF ASSIGNED PROJECT
 ###
 POST http://localhost:5000/users/assigned
 Content-Type: application/json
+
 token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImZpcnN0TmFtZSI6ImFsZXgiLCJsYXN0TmFtZSI6IndhaWhlbnlhIiwiZW1haWwiOiJseHdhaWhlbnlhQGdtYWlsLmNvbSIsInJvbGUiOiIwIiwiaWF0IjoxNjYwNTEwNjk5LCJleHAiOjE2NjA1MTA5OTl9.wMgODeHNpaNX0IYHmtxQR-pnp-ZaVyJndgh97BtTaus
+
+
+###
+POST http://localhost:5000/users/allusers
+Content-Type: application/json

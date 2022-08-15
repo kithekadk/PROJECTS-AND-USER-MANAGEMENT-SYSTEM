@@ -2,12 +2,12 @@ import { Request, Response } from "express";
 import mssql, { RequestError } from "mssql";
 import { sqlConfig } from "../Config/config";
 import { userLoginValidator, userValidator } from "../Helper/userValidator";
-import { CustomUser } from "../Interfaces/user";
+import { CustomUser, Userdetails } from "../Interfaces/user";
 import { User } from "../Interfaces/user";
 import { customProject, Project } from "../Interfaces/project"
 import bcrypt from 'bcrypt'
 import jwt from 'jsonwebtoken';
-import { projectUserSchema } from "../Helper/projectValidator";
+import { projectUserSchema, projectUserSchema2 } from "../Helper/projectValidator";
 
 import dotenv from 'dotenv'
 
@@ -94,8 +94,8 @@ export const loginUser = async(req:CustomUser, res:Response)=>{
 
 export const updateComplete = async (req:customProject, res:Response)=>{
     try {
-        const {projectId, userId}= req.body;
-        const {error, value }= projectUserSchema.validate(req.body)
+        const {projectId}= req.body;
+        const {error, value }= projectUserSchema2.validate(req.body)
         if(error){
             return res.status(400).json({
                 message:error.details[0].message
@@ -105,7 +105,6 @@ export const updateComplete = async (req:customProject, res:Response)=>{
 
         await pool.request()
         .input('projectId', mssql.VarChar, projectId)
-        .input('userId', mssql.VarChar, userId)
         .execute('setComplete')
 
         return res.status(200).json({
@@ -135,6 +134,21 @@ export const checkAssigned = async(req:customProject, res:Response)=>{
         res.status(200).json({
             assignedProj
         })
+    } catch (error) {
+        error
+    }
+}
+export const displayAllUsers = async(req:Userdetails, res:Response)=>{
+    try {
+        const pool = await mssql.connect(sqlConfig)
+
+        const allusers: Userdetails[] = await(
+            await pool.request()
+            .execute('displayAllUsers')).recordset
+        
+            res.status(200).json({
+                allusers
+            })
     } catch (error) {
         error
     }

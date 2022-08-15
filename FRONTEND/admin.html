@@ -17,17 +17,16 @@
             <div><ion-icon name="person-circle-outline" class="icons"></ion-icon></div>
             <br>
             <div class="adminRoles">
-                <a href="#">CREATE PROJECT</a> <br>
-                <a href="#">CHECK USERS</a> <br>
-                
-                <a href="#">VIEW PROJECT</a> <br>
-                <a href="#">DELETE PROJECT</a>
+                <a href="#" id="createprojectDiv">PENDING TASKS</a> <br>
+                <a href="#" id="checkuserDiv">CHECK USERS</a> <br>
+
             </div>
         </div>
         <div class="createProject">
-            <h2>CREATE PROJECT</h2>
+            
             <div class="newProject">
                 <form action="" method="post" class="createProjectForm">
+                    <h2>CREATE PROJECT</h2>
                     <div class="projectCreateError"></div>
                     <label for="projectName">Project Name</label>
                     <input type="text" name="" id="prjName"><br>
@@ -38,22 +37,40 @@
                     <input type="submit" value="CREATE" id="btnPrjtcreate">
                     
                 </form>
-            </div>
-        </div>
-        <div class="pendingProjects">
-            <h2>PENDING PROJECTS</h2>
-            <div class="displayPending">
+
                 
             </div>
         </div>
-        <div class="completedProjects">
-            <h2>COMPLETED PROJECTS</h2>
-            <div class="displayComplete">
-                <div class="displayIdcomp">effef</div>
-                <div class="displayNamecomp"></div>
-                <div class="displaydesccomp"></div>
-                <div class="deadlinecomp"></div>
+        <div class="pendingProjects">
+            
+            <div class="uncompleted">
+                <h2>PENDING PROJECTS</h2>
+
+                <div class="selectProject">
+                    <select name="" id="delExistingProject">
+                    <!-- <option id="options"></option> -->
+                    </select>
+                </div>
+
+                <div class="displayPending">
+                    
+                </div>
             </div>
+
+            <div class="availableusers">
+                <h2>ALL USERS</h2>
+                <div class="displayUsers">
+                    
+                </div>
+            </div>
+        </div>
+        
+        <div class="completedProjects">
+            
+                <h2>COMPLETED PROJECTS</h2>   
+                <div class="displayComplete">
+                                    
+                </div>
         </div>
     </div>
     <script src="dist/admin.js"></script>

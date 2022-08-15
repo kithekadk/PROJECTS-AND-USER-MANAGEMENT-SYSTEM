@@ -1,6 +1,6 @@
 import mssql, { pool, RequestError } from 'mssql'
 import { sqlConfig } from '../Config/config';
-import { projectUserSchema, taskValidator } from '../Helper/projectValidator';
+import { projectUserSchema, projectUserSchema2, taskValidator } from '../Helper/projectValidator';
 import { customProject, Project } from '../Interfaces/project';
 import { Response } from 'express';
 import {ExtendedData} from '../Middleware/tokenVerify';
@@ -70,6 +70,8 @@ export const projectDelete = async(req:customProject, res:Response)=>{
 
         return res.json({message: `PROJECT ${projectId} deleted`}) 
     } catch (error) {
+        console.log(error);
+        
         if(error instanceof RequestError){
             return res.status(404).json({
                 message:"No Task With That ID."

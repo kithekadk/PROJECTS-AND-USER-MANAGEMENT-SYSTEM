@@ -8,6 +8,12 @@ interface project{
     email:string,
     userId:string
 }
+interface users{
+    userId: number
+    firstName: string
+    lastName: string
+    email: string
+}
 
 if (Mail){
     userMail.textContent = `${Mail}`
@@ -37,10 +43,13 @@ createProjectbtn.addEventListener('click', (e)=>{
         setTimeout(() => {
            projectCreateError.textContent="" 
         }, 3000);
+        
         projectname.value="";
         projectDesc.value="";
         Deadline.value=""
-        
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
     }
 })
 class Project{
@@ -84,10 +93,14 @@ fetch("http://localhost:5000/projects/pendingProjects",{
     res=>{
         res.json().then(
             data=>{
+                console.log(data)
                 const myproject : project[] = data.project
                 
-                console.log(myproject)
+                // console.log(myproject)
                 if (myproject.length > 0){
+
+                    
+                    
                     let temp = "<table border>"
 
                     temp += '<thead>'+ '<b>'
@@ -96,7 +109,7 @@ fetch("http://localhost:5000/projects/pendingProjects",{
                     temp += '<td>' + 'PROJECT NAME' + '</td>'
                     temp += '<td>' + 'PROJECT DESCRIPTION' + '</td>'
                     temp += '<td>' + 'PROJECT DEADLINE' + '</td>'
-                    temp += '<td>' + 'USER INCHARGE' + '</td>'
+                    temp += '<td>' + 'USERID' + '</td>'
                     temp += '</tr>'
                     temp += '</b>'+'</thead>'
                     
@@ -167,3 +180,67 @@ fetch("http://localhost:5000/projects/completeProjects",{
         )
     }
 )
+
+const availableusers = document.querySelector(".availableusers") as HTMLDivElement
+const createprojectDiv = document.getElementById("createprojectDiv") as HTMLAnchorElement
+const checkuserDiv = document.getElementById("checkuserDiv") as HTMLAnchorElement
+const uncompleted = document.querySelector(".uncompleted") as HTMLDivElement
+const displayUsers = document.querySelector(".displayUsers") as HTMLDivElement
+const createProjectForm = document.querySelector(".createProjectForm") as HTMLFormElement
+
+createprojectDiv.addEventListener('click', ()=>{
+    uncompleted.style.display="flex" 
+    availableusers.style.display="none"   
+})
+
+checkuserDiv.addEventListener('click', ()=>{
+    availableusers.style.display="block" 
+    uncompleted.style.display="none"
+})
+fetch("http://localhost:5000/users/allusers",{
+    headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+    },
+    method:"POST"
+}).then(
+    res=>{
+        res.json().then(
+            data=>{
+                console.log(data);
+                
+                const allUsers : users[] = data.allusers
+                
+                console.log(allUsers)
+                if (allUsers.length > 0){
+                    let temp = "<table border>"
+
+                    temp += '<thead>'+ '<b>'
+                    temp += '<tr>'
+                    temp += '<td>' + 'ID' + '</td>'
+                    temp += '<td>' + 'PROJECT NAME' + '</td>'
+                    temp += '<td>' + 'PROJECT DESCRIPTION' + '</td>'
+                    temp += '<td>' + 'PROJECT DEADLINE' + '</td>'
+                    temp += '</tr>'
+                    temp += '</b>'+'</thead>'
+                    allUsers.forEach(({userId,firstName,lastName,email})=>{
+                 
+                        temp += '<tr>'
+                        temp += '<td>' + userId + '</td>'
+                        temp += '<td>' + firstName + '</td>'
+                        temp += '<td>' + lastName + '</td>'
+                        temp += '<td>' + email + '</td>'
+                        temp += '</tr>'
+                    })
+                    // const displayComplete=document.querySelector(".displayComplete") as HTMLDivElement;
+                    displayUsers.innerHTML=temp;
+                    
+                }else{
+                    // const displayComplete=document.querySelector(".displayComplete") as HTMLDivElement;
+                    displayUsers.textContent="No users at the moment";
+                }
+            }
+        )
+    }
+)
+
