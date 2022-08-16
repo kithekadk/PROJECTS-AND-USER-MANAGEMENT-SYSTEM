@@ -20,6 +20,7 @@ const AssignProjectMails = async()=>{
     const pool = await mssql.connect(sqlConfig)
     const projects:Task[]=await(await pool.request()
     .query(`SELECT email FROM dbo.USERS u INNER JOIN dbo.PROJECTS p ON p.userId= u.userId WHERE p.userId IS NOT NULL AND  p.status=0 AND p.assigned='NO'`)).recordset
+    
     console.log(projects);
 
     for (let project of projects){

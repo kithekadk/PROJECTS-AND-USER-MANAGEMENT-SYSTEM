@@ -14,16 +14,20 @@ fetch("http://localhost:5000/users/assigned",{
 }).then(
     res=>{
         res.json().then(
-            data=>{
-                console.log(data);
-                
+            data=>{              
                 const assignedProject : project[] = data.assignedProj
-                console.log(assignedProject) 
+                let uEmail
+                assignedProject.map((el)=>{
+                    uEmail= el.email
+                })
                 if (assignedProject.length ==0){
                     const assignedProjectDiv = document.querySelector(".assignedProjectDiv") as HTMLDivElement;
                     assignedProjectDiv.textContent="No task at the moment" 
                 }
-                else if ( assignedProject[0].email == localStorage.getItem("normalUser")){
+                
+                
+                else if (  uEmail === localStorage.getItem("normalUser")){
+                    console.log(assignedProject[0].email);
                     let temp = "<table border width='700px' height='300px'>"
 
                     temp += '<thead>'+ '<b>'
@@ -47,6 +51,9 @@ fetch("http://localhost:5000/users/assigned",{
                     assignedProjectDiv.innerHTML=temp;
                     
                 }else{
+                    console.log(assignedProject);
+                    
+                    
                     const assignedProjectDiv=document.querySelector(".assignedProjectDiv") as HTMLDivElement;
                     assignedProjectDiv.textContent="No Pending Projects at the moment";
                 }

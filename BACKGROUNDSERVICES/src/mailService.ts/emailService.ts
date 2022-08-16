@@ -19,7 +19,7 @@ interface Task {
 const SendEmails = async()=>{
     const pool = await mssql.connect(sqlConfig)
     const projects:Task[]=await(await pool.request()
-    .query('SELECT email, firstName FROM dbo.USERS u INNER JOIN dbo.PROJECTS p ON p.userId = u.userId WHERE status=1 AND sentEmail=0')).recordset
+    .query('SELECT email FROM dbo.USERS u INNER JOIN dbo.PROJECTS p ON p.userId = u.userId WHERE status=1 AND sentEmail=0')).recordset
     console.log(projects);
 
     for (let project of projects){

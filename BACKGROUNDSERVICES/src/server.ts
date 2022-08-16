@@ -14,7 +14,7 @@ const run =() =>{
 }
 run()
 
-app.listen(5500,()=>{
+app.listen(5600,()=>{
     console.log("mail server started...");
     
 })
