@@ -2,7 +2,7 @@ import { Request, Response } from "express";
 import mssql, { RequestError } from "mssql";
 import { sqlConfig } from "../Config/config";
 import { userLoginValidator, userValidator } from "../Helper/userValidator";
-import { CustomUser, Userdetails } from "../Interfaces/user";
+import { CustomUser, CustomUser2, Userdetails } from "../Interfaces/user";
 import { User } from "../Interfaces/user";
 import { customProject, Project } from "../Interfaces/project"
 import bcrypt from 'bcrypt'
@@ -154,16 +154,16 @@ export const displayAllUsers = async(req:Userdetails, res:Response)=>{
     }
 }
 
-export const UnassignedUsers = async(req:Userdetails, res:Response)=>{
+export const UnassignedUsers = async(req:CustomUser2, res:Response)=>{
     try {
         const pool= await mssql.connect(sqlConfig)
 
         const IdleUsers: Userdetails[] = await(
             await pool.request().execute('IdleUsers')).recordset
 
-        res.status(200).json({
+        res.status(200).json(
             IdleUsers
-        })
+        )
         
     } catch (error) {
         error

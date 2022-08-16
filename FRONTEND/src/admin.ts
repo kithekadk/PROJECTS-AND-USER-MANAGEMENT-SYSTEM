@@ -95,7 +95,7 @@ class Project{
 }
 //assigning projects
 const idleuserEmails = document.getElementById("idleuserEmails") as HTMLSelectElement
-fetch("http://localhost:5000/users/allusers",{
+fetch("http://localhost:5000/users/idleusers",{
     headers:{
         'Accept':'application/json',
         'Content-Type':'application/json'
@@ -107,22 +107,18 @@ fetch("http://localhost:5000/users/allusers",{
             data=>{
                 console.log(data);
                 
-                let pendingUsers: users[]= data.allusers
-                // console.log(pendingUsers);
-                
-                if(pendingUsers.length>0){
-                const userIdno = pendingUsers.filter((el)=>{
-                    return el.userId
-                })
-                userIdno.forEach((el)=>{
-                    let userID = el.userId
+                let pendingUsers : users[]=data
                     
+                console.log(pendingUsers);
+                
+                pendingUsers.forEach((el)=>{
+                    const userID= el.userId
+
                     const option= document.createElement("option")
                     option.innerHTML = `${userID}`
                     idleuserEmails.appendChild(option)
                 })
                 
-                }
             }
         )
     }
@@ -138,10 +134,10 @@ fetch("http://localhost:5000/projects/pendingProjects",{
     res=>{
         res.json().then(
             data=>{
-                console.log(data)
+                // console.log(data)
                 const myproject : project[] = data.project
                 
-                console.log(myproject)
+                // console.log(myproject)
                 if (myproject.length > 0){
 
                     

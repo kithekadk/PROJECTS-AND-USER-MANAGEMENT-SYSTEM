@@ -86,7 +86,7 @@ fetch("http://localhost:5000/users/assigned",{
     res=>{
         res.json().then(
             data=>{
-                               
+                 console.log(data)              
                 const assignedProject : project[] = data.assignedProj
 
                 const thisprojectId = assignedProject.filter((el)=>{
