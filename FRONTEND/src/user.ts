@@ -1,10 +1,13 @@
 const usrEmail = document.getElementById("usrEmail") as HTMLParagraphElement
 const userEmail=localStorage.getItem('normalUser')
 const logout = document.querySelector(".logout") as HTMLAnchorElement
+//logout logic
 logout.addEventListener('click',(e)=>{
     e.preventDefault();
+    localStorage.clear()
     location.href="index.html"
 })
+
 if (userEmail){
     usrEmail.textContent=`${userEmail}`
 }

@@ -1,6 +1,7 @@
 let logoutAdmin = document.querySelector(".logoutAdmin") as HTMLAnchorElement
 logoutAdmin.addEventListener('click',(e)=>{
     e.preventDefault();
+    localStorage.clear()
     location.href="index.html"
 })
 

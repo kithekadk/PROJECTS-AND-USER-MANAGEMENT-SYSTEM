@@ -163,6 +163,9 @@ class Users{
             }else if(data.role === '0' && data.password !=="password"){
                 localStorage.setItem('normalUser', data.email!)
                 location.href = 'user.html'
+            }else{
+                loginError.textContent="Wrong credentials, please try again"
+                loginError.style.color="red"
             }
         })
 }
