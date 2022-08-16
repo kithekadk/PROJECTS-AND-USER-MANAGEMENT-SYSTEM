@@ -1,12 +1,12 @@
-CREATE PROCEDURE deleteProject (@projectName VARCHAR(200))
+CREATE PROCEDURE deleteProject (@projectId VARCHAR(200))
 AS
 BEGIN
-IF EXISTS (SELECT projectId, ProjectName FROM dbo.PROJECTS WHERE projectName=@projectName)
+IF EXISTS (SELECT projectId FROM dbo.PROJECTS WHERE projectId=@projectId)
 BEGIN
-	DELETE FROM PROJECTS WHERE projectName=@projectName;
+	DELETE FROM dbo.PROJECTS WHERE projectName=@projectId;
 	RETURN;
 END
 BEGIN
-	RAISERROR('No Task With That Id', 11,1);
+	RAISERROR('No Task With That ID', 11,1);
 END
 END

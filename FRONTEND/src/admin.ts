@@ -6,7 +6,7 @@ interface project{
     description: string,
     deadline: string,
     email:string,
-    userId:string
+    userId:number
 }
 interface users{
     userId: number
@@ -29,6 +29,9 @@ createProjectbtn.addEventListener('click', (e)=>{
     const pjname = projectname.value
     const pjdesc = projectDesc.value
     const due = Deadline.value
+    const user = parseInt(idleuserEmails.value)
+    console.log(user);
+    
 
     if(!pjname || !pjdesc || !due){
         projectCreateError.style.color="red";
@@ -37,7 +40,7 @@ createProjectbtn.addEventListener('click', (e)=>{
            projectCreateError.textContent="" 
         }, 4000);
     }else{
-        Project.getProject().createProject(pjname, pjdesc, due)
+        Project.getProject().createProject(pjname, pjdesc, due, user)
         projectCreateError.style.color="green";
         projectCreateError.textContent="Project created successfully";
         setTimeout(() => {
@@ -47,6 +50,7 @@ createProjectbtn.addEventListener('click', (e)=>{
         projectname.value="";
         projectDesc.value="";
         Deadline.value=""
+        idleuserEmails.value=""
         setTimeout(() => {
             window.location.reload();
         }, 3000);
@@ -59,7 +63,7 @@ class Project{
 
     constructor(){}
 
-    createProject(projectname:string, description:string, enddate:string){
+    createProject(projectname:string, description:string, enddate:string, userId:number){
         const promise = new Promise((resolve, reject)=>{
             fetch('http://localhost:5000/projects/create',{
                 headers:{
@@ -70,7 +74,8 @@ class Project{
                 body:JSON.stringify({
                     "projectName":projectname,
                     "description":description,
-                    "endDate":enddate
+                    "endDate":enddate,
+                    "userId": userId
                 })
             }).then(res=>{
                 resolve(res.json())
@@ -82,6 +87,40 @@ class Project{
         
     }
 }
+//assigning projects
+const idleuserEmails = document.getElementById("idleuserEmails") as HTMLSelectElement
+fetch("http://localhost:5000/users/allusers",{
+    headers:{
+        'Accept':'application/json',
+        'Content-Type':'application/json'
+    },
+    method:"POST"
+}).then(
+    res=>{
+        res.json().then(
+            data=>{
+                console.log(data);
+                
+                let pendingUsers: users[]= data.allusers
+                // console.log(pendingUsers);
+                
+                if(pendingUsers.length>0){
+                const userIdno = pendingUsers.filter((el)=>{
+                    return el.userId
+                })
+                userIdno.forEach((el)=>{
+                    let userID = el.userId
+                    
+                    const option= document.createElement("option")
+                    option.innerHTML = `${userID}`
+                    idleuserEmails.appendChild(option)
+                })
+                
+                }
+            }
+        )
+    }
+)
 
 fetch("http://localhost:5000/projects/pendingProjects",{
     headers:{
@@ -96,7 +135,7 @@ fetch("http://localhost:5000/projects/pendingProjects",{
                 console.log(data)
                 const myproject : project[] = data.project
                 
-                // console.log(myproject)
+                console.log(myproject)
                 if (myproject.length > 0){
 
                     
@@ -148,7 +187,7 @@ fetch("http://localhost:5000/projects/completeProjects",{
             data=>{
                 const completeProject : project[] = data.projectcomplete
                 
-                console.log(completeProject)
+                // console.log(completeProject)
                 if (completeProject.length > 0){
                     let temp = "<table border>"
 
@@ -174,7 +213,7 @@ fetch("http://localhost:5000/projects/completeProjects",{
                     
                 }else{
                     const displayComplete=document.querySelector(".displayComplete") as HTMLDivElement;
-                    displayComplete.textContent="No Pending Projects at the moment";
+                    displayComplete.textContent="No Completed Projects at the moment";
                 }
             }
         )
@@ -243,39 +282,9 @@ fetch("http://localhost:5000/users/allusers",{
     }
 )
 
-//assigning projects
-const userEmails = document.getElementById("userEmails")
-fetch("http://localhost:5000/users/idleusers",{
-    headers:{
-        'Accept':'application/json',
-        'Content-Type':'application/json'
-    },
-    method:"POST"
-}).then(
-    res=>{
-        res.json().then(
-            data=>{
-                
-                let pendingUsers: users[]= data.IdleUsers
-                
-                if(pendingUsers.length>0){
-                const emails = pendingUsers.filter((el)=>{
-                    return el.email
-                })
-                emails.forEach((el)=>{
-                    let userEmail = el.email
-                    const option= document.createElement("option")
-                    option.innerHTML = userEmail
-                    userEmails?.appendChild(option)
-                })
-                
-                }
-            }
-        )
-    }
-)
 
-const pendingjob = document.getElementById("pendingjob")
+
+const pendingjob = document.getElementById("pendingjob") as HTMLSelectElement
 fetch("http://localhost:5000/projects/pendingProjects",{
     headers:{
         'Accept':'application/json',
@@ -289,15 +298,17 @@ fetch("http://localhost:5000/projects/pendingProjects",{
                 
                 let pendingprojs :project[]= data.project
                 if(pendingprojs.length>0){
-                    const projNames = pendingprojs.filter((el)=>{
-                        return el.projectName
+                    const projIDs = pendingprojs.filter((el)=>{
+                        return el.projectId
                     })
-                    projNames.forEach((el)=>{
-                        let projname= el.projectName
+                    projIDs.forEach((el)=>{
+                        let projid= el.projectId
                         const option1= document.createElement("option")
-                        option1.innerHTML=projname
-                        pendingjob?.appendChild(option1)
+                        option1.innerHTML=`${projid}`
+                        pendingjob.appendChild(option1)
                     })
+                }else{
+                    pendingjob.innerText="no pending projects"
                 }
             }
         )
@@ -307,15 +318,16 @@ fetch("http://localhost:5000/projects/pendingProjects",{
 const deleteProject = document.querySelector(".deleteProject") as HTMLButtonElement
 deleteProject.addEventListener('click',(e)=>{
     e.preventDefault()
+const taskid = parseInt(pendingjob.value)
+console.log(taskid);
 
-if (pendingjob){
-    delProject.getProject().deleteNow(pendingjob.innerText)
+if (taskid){
+    
+    delProject.getProject().deleteNow(taskid)
     console.log(pendingjob.innerText);
     setTimeout(() => {
         window.location.reload()
     }, 3000);
-}else{
-    pendingjob!.innerText="--no task--"
 }
 })
 
@@ -324,7 +336,7 @@ class delProject{
         return new delProject
     }
     constructor(){}
-    deleteNow(projectName:string){
+    deleteNow(projectId:number){
         const promise5 = new Promise((resolve, reject)=>{
             fetch("http://localhost:5000/projects/delete",{
                 headers:{
@@ -333,9 +345,15 @@ class delProject{
                 },
                 method:"POST",
                 body:JSON.stringify({
-                    "projectName": projectName
+                    "projectId": projectId
                 })
+            }).then(res=>{
+                resolve(res.json())
+            }).catch(err=>{
+                reject(err)
             })
         })
+        promise5.then((data=>console.log(data))).catch(err=>console.log(err)
+        )
     }
 }

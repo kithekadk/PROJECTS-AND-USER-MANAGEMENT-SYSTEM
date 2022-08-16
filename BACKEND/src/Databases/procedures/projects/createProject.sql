@@ -12,7 +12,7 @@ ELSE
 	BEGIN
 
 
-	INSERT INTO PROJECTS (projectName, description, deadline, userId)
+	INSERT INTO dbo.PROJECTS (projectName, description, deadline, userId)
 	VALUES (@projectName, @description, @deadline, @userId)
 END
 END

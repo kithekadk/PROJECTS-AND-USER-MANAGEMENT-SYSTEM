@@ -1,5 +1,5 @@
 CREATE PROCEDURE pendingProjects 
 AS
 BEGIN
-	SELECT projectId,projectName,description,deadline FROM dbo.PROJECTS WHERE userId IS NULL
+	SELECT projectId,projectName,description,deadline, userId FROM dbo.PROJECTS WHERE status=0
 END

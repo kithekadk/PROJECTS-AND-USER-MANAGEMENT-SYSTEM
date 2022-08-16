@@ -32,9 +32,10 @@ POST http://localhost:5000/projects/create
 Content-Type: application/json
 
 {
-    "projectName":"abcd",
+    "projectName":"abdgh",
     "description":"hacking",
-    "endDate":"12/3/2022"
+    "endDate":"12/3/2022",
+    "userId":"1012"
 }
 
 
@@ -44,7 +45,7 @@ POST http://localhost:5000/projects/delete
 Content-Type: application/json
 
 {
-    "projectName":""
+    "projectId":"2"
 }
 
 
@@ -86,7 +87,6 @@ Content-Type: application/json
 ###
 POST http://localhost:5000/users/assigned
 Content-Type: application/json
-
 token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjIsImZpcnN0TmFtZSI6ImFsZXgiLCJsYXN0TmFtZSI6IndhaWhlbnlhIiwiZW1haWwiOiJseHdhaWhlbnlhQGdtYWlsLmNvbSIsInJvbGUiOiIwIiwiaWF0IjoxNjYwNTEwNjk5LCJleHAiOjE2NjA1MTA5OTl9.wMgODeHNpaNX0IYHmtxQR-pnp-ZaVyJndgh97BtTaus
 
 //ALL USERS

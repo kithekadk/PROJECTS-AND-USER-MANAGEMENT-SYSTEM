@@ -3,7 +3,8 @@ import Joi from "joi";
 export const taskValidator = Joi.object({
     projectName: Joi.string().required(),
     description: Joi.string().required(),
-    endDate:Joi.date()
+    endDate:Joi.date(),
+    userId:Joi.number()
 })
 
 export const projectUserSchema = Joi.object({

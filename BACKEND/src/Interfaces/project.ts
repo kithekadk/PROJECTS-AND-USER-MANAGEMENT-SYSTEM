@@ -7,8 +7,7 @@ export interface customProject extends Request{
         projectName: string,
         description: string,
         endDate:string,
-        userId:string,
-        
+        userId:number,
     }
 }
 
@@ -17,7 +16,8 @@ export interface Project{
     projectId : number;
     projectName: string,
     description: string,
-    endDate:string
+    endDate:string,
+    userId:number
 }
 
 export interface Data{
