@@ -70,7 +70,7 @@ export const loginUser = async(req:CustomUser, res:Response)=>{
             })
         }
         const logins = user.map(item =>{
-            const{password, ...rest}=item;
+            const{password,...rest}=item;
             return rest;
         })
         const token = jwt.sign (logins[0], process.env.KEY as string, {expiresIn:'300s'})

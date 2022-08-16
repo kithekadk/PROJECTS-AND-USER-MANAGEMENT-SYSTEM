@@ -1,3 +1,9 @@
+let logoutAdmin = document.querySelector(".logoutAdmin") as HTMLAnchorElement
+logoutAdmin.addEventListener('click',(e)=>{
+    e.preventDefault();
+    location.href="index.html"
+})
+
 const userMail= document.getElementById("userRole") as HTMLParagraphElement;
 const Mail = localStorage.getItem('usrMail')
 interface project{

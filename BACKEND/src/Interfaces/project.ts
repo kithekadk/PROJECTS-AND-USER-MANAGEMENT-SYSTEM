@@ -24,6 +24,7 @@ export interface Data{
     projectId : number;
     projectName: string,
     description: string,
+    password: string,
     endDate:string,
     userId:string,
     email:string,

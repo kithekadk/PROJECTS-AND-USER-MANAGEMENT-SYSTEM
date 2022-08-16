@@ -82,14 +82,23 @@ btnRegister.addEventListener('click',(e)=>{
     }
     else{
         RegUser.getUser().registerUser(RegfName, ReglName, EmailReg,passwordReg)
+
+        regError.style.color="green"
+        regError.textContent="Registration Successful..."
+
         firstName.value = ""
         lastName.value = ""
         RegEmail.value = ""
         Regpassword.value = ""
 
         setTimeout(() => {
-            loginForm 
+            formContainer.style.display="none"
+            loginContainer.style.display = "flex"
+            
         }, 3000);
+        setTimeout(() => {
+            regError.textContent=""
+        }, 1000);
 
     }
 })
@@ -137,7 +146,7 @@ class Users{
     redirect(){
         const token = localStorage.getItem('token') as string
 
-        new Promise <{email?:string, role?:string, userId?:number}>((resolve, reject)=>{
+        new Promise <{email?:string, role?:string, userId?:number, password? :string}>((resolve, reject)=>{
             fetch('http://localhost:5000/projects/check',{
                 headers:{
                     'Accept': 'application/json',
@@ -148,10 +157,10 @@ class Users{
             }).then(res=>resolve(res.json()))
             .catch(err=> reject(err))
         }).then(data=>{
-            if (data.role === '1'){
+            if (data.role === '1' && data.password !=="password"){
                 localStorage.setItem('usrMail', data.email!);
                 location.href ='admin.html'
-            }else{
+            }else if(data.role === '0' && data.password !=="password"){
                 localStorage.setItem('normalUser', data.email!)
                 location.href = 'user.html'
             }

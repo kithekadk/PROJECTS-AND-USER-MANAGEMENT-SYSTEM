@@ -1,11 +1,15 @@
 const usrEmail = document.getElementById("usrEmail") as HTMLParagraphElement
 const userEmail=localStorage.getItem('normalUser')
-
+const logout = document.querySelector(".logout") as HTMLAnchorElement
+logout.addEventListener('click',(e)=>{
+    e.preventDefault();
+    location.href="index.html"
+})
 if (userEmail){
     usrEmail.textContent=`${userEmail}`
 }
 
-fetch("http://localhost:5000/users/assigned",{
+fetch("http://localhost:5000/users/assigned/",{
     headers:{
         'Accept':'application/json',
         'Content-Type':'application/json'
@@ -16,19 +20,27 @@ fetch("http://localhost:5000/users/assigned",{
         res.json().then(
             data=>{              
                 const assignedProject : project[] = data.assignedProj
-                let uEmail
-                assignedProject.map((el)=>{
-                    uEmail= el.email
+                
+                
+                
+                const userme = assignedProject.filter((el)=>{
+                    return el.email== localStorage.getItem("normalUser")
                 })
-                if (assignedProject.length ==0){
+
+
+                console.log(userme);
+                
+                if (userme.length ==0){
                     const assignedProjectDiv = document.querySelector(".assignedProjectDiv") as HTMLDivElement;
                     assignedProjectDiv.textContent="No task at the moment" 
                 }
                 
                 
-                else if (  uEmail === localStorage.getItem("normalUser")){
-                    console.log(assignedProject[0].email);
-                    let temp = "<table border width='700px' height='300px'>"
+                
+                
+                else if ( userme){
+                    
+                    let temp = "<table border width='500px' height='200px'>"
 
                     temp += '<thead>'+ '<b>'
                     temp += '<tr>'
@@ -38,7 +50,9 @@ fetch("http://localhost:5000/users/assigned",{
                     temp += '<td>' + 'PROJECT DEADLINE' + '</td>'
                     temp += '</tr>'
                     temp += '</b>'+'</thead>'
-                    assignedProject.forEach(({projectId,projectName, description, deadline})=>{
+
+                    
+                    userme.forEach(({projectId,projectName, description, deadline})=>{
                  
                         temp += '<tr>'
                         temp += '<td>' + projectId + '</td>'
@@ -51,9 +65,6 @@ fetch("http://localhost:5000/users/assigned",{
                     assignedProjectDiv.innerHTML=temp;
                     
                 }else{
-                    console.log(assignedProject);
-                    
-                    
                     const assignedProjectDiv=document.querySelector(".assignedProjectDiv") as HTMLDivElement;
                     assignedProjectDiv.textContent="No Pending Projects at the moment";
                 }
@@ -77,12 +88,16 @@ fetch("http://localhost:5000/users/assigned",{
             data=>{
                                
                 const assignedProject : project[] = data.assignedProj
-                    if (assignedProject.length==0){
+
+                const thisprojectId = assignedProject.filter((el)=>{
+                    return el.email== localStorage.getItem("normalUser")
+                })
+                    if (thisprojectId.length==0){
                         taskToComplete.innerHTML="no task"; 
                     }
-                    else if ( assignedProject[0].email == localStorage.getItem("normalUser") ){
+                    else if ( thisprojectId ){
                     
-                    assignedProject.forEach(({projectId})=>{
+                        thisprojectId.forEach(({projectId})=>{
                                               
                         taskToComplete.innerHTML  = projectId 
                     })                   
