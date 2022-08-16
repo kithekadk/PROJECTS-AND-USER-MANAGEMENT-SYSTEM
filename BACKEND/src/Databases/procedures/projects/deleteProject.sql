@@ -3,7 +3,7 @@ AS
 BEGIN
 IF EXISTS (SELECT projectId FROM dbo.PROJECTS WHERE projectId=@projectId)
 BEGIN
-	DELETE FROM dbo.PROJECTS WHERE projectName=@projectId;
+	DELETE FROM dbo.PROJECTS WHERE projectId=@projectId;
 	RETURN;
 END
 BEGIN

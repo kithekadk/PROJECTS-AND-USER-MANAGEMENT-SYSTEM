@@ -29,7 +29,7 @@ createProjectbtn.addEventListener('click', (e)=>{
     const pjname = projectname.value
     const pjdesc = projectDesc.value
     const due = Deadline.value
-    const user = parseInt(idleuserEmails.value)
+    const user = idleuserEmails.value
     console.log(user);
     
 
@@ -63,8 +63,8 @@ class Project{
 
     constructor(){}
 
-    createProject(projectname:string, description:string, enddate:string, userId:number){
-        const promise = new Promise((resolve, reject)=>{
+    createProject(projectname:string, description:string, enddate:string, userId:string){
+        const promise = new Promise<{error?:string, message?:string}>((resolve, reject)=>{
             fetch('http://localhost:5000/projects/create',{
                 headers:{
                     'Accept':'application/json',
@@ -318,7 +318,7 @@ fetch("http://localhost:5000/projects/pendingProjects",{
 const deleteProject = document.querySelector(".deleteProject") as HTMLButtonElement
 deleteProject.addEventListener('click',(e)=>{
     e.preventDefault()
-const taskid = parseInt(pendingjob.value)
+const taskid = (pendingjob.value)
 console.log(taskid);
 
 if (taskid){
@@ -336,8 +336,8 @@ class delProject{
         return new delProject
     }
     constructor(){}
-    deleteNow(projectId:number){
-        const promise5 = new Promise((resolve, reject)=>{
+    deleteNow(projectId:string){
+        const promise5 = new Promise<{error?:string, message?:string}>((resolve, reject)=>{
             fetch("http://localhost:5000/projects/delete",{
                 headers:{
                     'Accept':'application/json',
